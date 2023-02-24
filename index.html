@@ -1,40 +1,40 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-
-<head>
+  <head>
     <title>Heart</title>
-    <META NAME="Generator" CONTENT="EditPlus">
-    <META NAME="Author" CONTENT="">
-    <META NAME="Keywords" CONTENT="">
-    <META NAME="Description" CONTENT="">
-    <link rel="stylesheet" href="style.css">
+    <meta name="Generator" content="EditPlus" />
+    <meta name="Author" content="" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <!---------------INPUT--------------->
     <div class="input-handle">
-        <div class="btn-click">
-            <button onclick="setTimeout(showHeart, 500)">
-                <img src="gift.jpg" alt="gift" width="80" height="80">
-            </button>
-        </div>
+      <div class="btn-click">
+        <button onclick="setTimeout(showHeart, 500)">
+          <img src="gift.jpg" alt="gift" width="80" height="80" />
+        </button>
+      </div>
 
-        <div class="text-gift">
-            <h1>Click me for a surprise</h1>
-        </div>
+      <div class="text-gift">
+        <h1>Click me for a surprise</h1>
+      </div>
     </div>
 
     <!---------------SHOW HEART------------>
     <div class="box">
-        <canvas id="pinkboard"></canvas>
+      <canvas id="pinkboard"></canvas>
+    </div>
+
+    <div class="hidden text-love">
+      <h1>I Love You</h1>
     </div>
 
     <!------------------TEXT---------------->
     <p id="showText"></p>
 
-
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

@@ -1,26 +1,28 @@
 // HÀM ẨN BUTTON KHI CLICK
 var inputHandle = document.querySelector('.input-handle');
-var areaText = document.getElementById("showText");
 
-inputHandle.addEventListener('click', function() {
+inputHandle.addEventListener('click', function () {
     setTimeout(hideInput, 500)
 })
 function hideInput() {
     inputHandle.classList.add("hidden")
     areaText.classList.add("hidden")
+    setTimeout(showTextLove, 1000)
 }
 
 
 // HÀM SHOW TEXT
 var i = 0;
-var text = 'Chiều muộn, mưa ngoài trời cứ rơi rả rích, mưa rơi theo những giai điệu đã sẵn, mưa có lúc cao trào, lúc trầm lắng, cũng chẳng biết khi nào nguội tạnh... Khép mình sau khung cửa sổ màu xanh in qua nền trời rõ rệt, tôi cứ mãi lặng im, theo đuổi ý nghĩ vu vơ, bất chợt ấy hàng giờ. Trong dòng đời hối hả, đầy bận rộn, lo toan và bươn chải, chẳng có nhiều thời gian để suy ngẫm, để buồn vui cho mình nữa, để rồi một ngày, lòng cảm thấy trống vắng, cô đơn, cuộc sống chung mất dần những niềm vui nho nhỏ...';
+var text = 'Đừng bao giờ nói KHÔNG THỂ, vì không ai biết được giới hạn cực đại của bản thân đến mức nào!';
+var areaText = document.getElementById("showText");
+
 var speed = 80;
 function typeWriter() {
-  if (i < text.length) {
-    document.getElementById("showText").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, speed );
-  }
+    if (i < text.length) {
+        areaText.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+    }
 }
 
 
@@ -36,23 +38,27 @@ function showHeart() {
             size: 8, // kích thước hạt tính bằng pixel
         },
     };
-    
-    (function () { var b = 0; var c = ["ms", "moz", "webkit", "o"]; 
-    for (var a = 0; a < c.length && !window.requestAnimationFrame; ++a) { 
-        window.requestAnimationFrame = window[c[a] + "RequestAnimationFrame"]; 
-        window.cancelAnimationFrame = window[c[a] + "CancelAnimationFrame"] || window[c[a] + "CancelRequestAnimationFrame"] 
-    } 
-    if (!window.requestAnimationFrame) {
-         window.requestAnimationFrame = function (h, e) { 
-            var d = new Date().getTime(); 
-            var f = Math.max(0, 16 - (d - b)); 
-            var g = window.setTimeout(function () { 
-                h(d + f) }, f); b = d + f; return g } 
-                    } 
-                    if (!window.cancelAnimationFrame) { window.cancelAnimationFrame = function (d) { clearTimeout(d) } } }());
 
-                    
-    
+    (function () {
+        var b = 0; var c = ["ms", "moz", "webkit", "o"];
+        for (var a = 0; a < c.length && !window.requestAnimationFrame; ++a) {
+            window.requestAnimationFrame = window[c[a] + "RequestAnimationFrame"];
+            window.cancelAnimationFrame = window[c[a] + "CancelAnimationFrame"] || window[c[a] + "CancelRequestAnimationFrame"]
+        }
+        if (!window.requestAnimationFrame) {
+            window.requestAnimationFrame = function (h, e) {
+                var d = new Date().getTime();
+                var f = Math.max(0, 16 - (d - b));
+                var g = window.setTimeout(function () {
+                    h(d + f)
+                }, f); b = d + f; return g
+            }
+        }
+        if (!window.cancelAnimationFrame) { window.cancelAnimationFrame = function (d) { clearTimeout(d) } }
+    }());
+
+
+
     // Class Point
     var Point = (function () {
         function Point(x, y) {
@@ -78,8 +84,8 @@ function showHeart() {
         };
         return Point;
     })();
-    
-    
+
+
     // Class Particle (hạt) 
     var Particle = (function () {
         function Particle() {
@@ -114,14 +120,14 @@ function showHeart() {
         };
         return Particle;
     })();
-     
+
     // Class ParticlePool
     var ParticlePool = (function () {
         var particles,
             firstActive = 0,
             firstFree = 0,
             duration = settings.particles.duration;
-    
+
         function ParticlePool(length) {
             // create and populate particle pool
             particles = new Array(length);
@@ -130,7 +136,7 @@ function showHeart() {
         }
         ParticlePool.prototype.add = function (x, y, dx, dy) {
             particles[firstFree].initialize(x, y, dx, dy);
-    
+
             // handle circular queue
             firstFree++;
             if (firstFree == particles.length) firstFree = 0;
@@ -139,7 +145,7 @@ function showHeart() {
         };
         ParticlePool.prototype.update = function (deltaTime) {
             var i;
-    
+
             // update active particles
             if (firstActive < firstFree) {
                 for (i = firstActive; i < firstFree; i++)
@@ -151,14 +157,14 @@ function showHeart() {
                 for (i = 0; i < firstFree; i++)
                     particles[i].update(deltaTime);
             }
-    
+
             // remove inactive particles
             while (particles[firstActive].age >= duration && firstActive != firstFree) {
                 firstActive++;
                 if (firstActive == particles.length) firstActive = 0;
             }
-    
-    
+
+
         };
         ParticlePool.prototype.draw = function (context, image) {
             // draw active particles
@@ -175,14 +181,14 @@ function showHeart() {
         };
         return ParticlePool;
     })();
-    
+
     // Để tất cả chúng cùng nhau
     (function (canvas) {
         var context = canvas.getContext('2d'),
             particles = new ParticlePool(settings.particles.length),
             particleRate = settings.particles.length / settings.particles.duration, // particles/sec
             time;
-    
+
         // get point on heart with -PI <= t <= PI
         function pointOnHeart(t) {
             return new Point(
@@ -190,7 +196,7 @@ function showHeart() {
                 130 * Math.cos(t) - 50 * Math.cos(2 * t) - 20 * Math.cos(3 * t) - 10 * Math.cos(4 * t) + 25
             );
         }
-    
+
         // creating the particle image using a dummy canvas
         var image = (function () {
             var canvas = document.createElement('canvas'),
@@ -223,20 +229,20 @@ function showHeart() {
             image.src = canvas.toDataURL();
             return image;
         })();
-    
+
         // render that thing!
         function render() {
             // next animation frame
             requestAnimationFrame(render);
-    
+
             // update time
             var newTime = new Date().getTime() / 1000,
                 deltaTime = newTime - (time || newTime);
             time = newTime;
-    
+
             // clear canvas
             context.clearRect(0, 0, canvas.width, canvas.height);
-    
+
             // create new particles
             var amount = particleRate * deltaTime;
             for (var i = 0; i < amount; i++) {
@@ -244,25 +250,31 @@ function showHeart() {
                 var dir = pos.clone().length(settings.particles.velocity);
                 particles.add(canvas.width / 2 + pos.x, canvas.height / 2 - pos.y, dir.x, -dir.y);
             }
-    
+
             // update and draw particles
             particles.update(deltaTime);
             particles.draw(context, image);
         }
-    
+
         // handle (re-)sizing of the canvas
         function onResize() {
             canvas.width = canvas.clientWidth;
             canvas.height = canvas.clientHeight;
         }
         window.onresize = onResize;
-    
+
         // delay rendering bootstrap
         setTimeout(function () {
             onResize();
             render();
         }, 10);
     })(document.getElementById('pinkboard'));
+}
+
+// HÀM SHOW TEXT I LOVE YOU
+var textLove = document.querySelector(".text-love")
+function showTextLove() {
+    textLove.classList.add("show")
 }
 
 typeWriter()
